@@ -3,7 +3,7 @@ from datetime import datetime, timedelta
 import csv
 import os
 # --- CONFIG ---
-API_KEY = os.getenv("METALPRICE_API_KEY")
+METALPRICE_API_KEY = os.getenv("METALPRICE_API_KEY")
 BASE = "XAU"
 QUOTE = "MYR"
 CSV_FILE = "gold_ohlc_per_gram.csv"
@@ -13,7 +13,7 @@ GRAMS_PER_TROY_OUNCE = 31.1035  # Constant to convert troy ounce to gram
 def fetch_ohlc(date_str):
     API_URL = (
         f"https://api.metalpriceapi.com/v1/ohlc"
-        f"?api_key={API_KEY}"
+        f"?api_key={METALPRICE_API_KEY}"
         f"&base={BASE}"
         f"&currency={QUOTE}"
         f"&date={date_str}"
