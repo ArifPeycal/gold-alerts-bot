@@ -68,7 +68,7 @@ def append_ohlc_to_csv(ohlc):
             print("No valid data to append to CSV.")
 
 def main():
-    date_str = (datetime.utcnow() - timedelta(days=3)).strftime("%Y-%m-%d")
+    date_str = (datetime.utcnow() - timedelta(days=1)).strftime("%Y-%m-%d")
     print(f"Fetching OHLC data for {date_str} (prices per gram)...")
     ohlc = fetch_ohlc(date_str)
     if ohlc:
