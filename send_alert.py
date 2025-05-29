@@ -3,9 +3,6 @@ from datetime import datetime, timedelta
 import statistics
 import requests
 import os
-import re
-
-
 
 # --- CONFIG ---
 CSV_FILE = "gold_ohlc_per_gram.csv"
@@ -13,10 +10,6 @@ TELEGRAM_TOKEN = os.getenv("TELEGRAM_TOKEN")
 TELEGRAM_CHAT_ID = os.getenv("TELEGRAM_CHAT_ID")
 METALPRICE_API_KEY = os.getenv("METALPRICE_API_KEY")
 GRAMS_PER_TROY_OUNCE = 31.1035 
-
-def escape_markdown(text):
-    """Escape special characters for MarkdownV2."""
-    return re.sub(r'([_*\[\]()~`>#+\-=|{}.!])', r'\\\1', text)
     
 def fetch_latest_price():
     url = (
@@ -130,7 +123,7 @@ def summarize_today_from_latest():
             percent_change = (change / yesterday_close) * 100
 
             direction = "🔼" if change > 0 else "🔽" if change < 0 else "➖"
-            comparison = f"{direction} *Change vs Yesterday ({yesterday_date}):* {change:+.2f} MYR ({percent_change:+.2f}%)"
+            comparison = f"{direction} *Change vs Yesterday:* {change:+.2f} MYR ({percent_change:+.2f}%)"
     except Exception as e:
         comparison = f"⚠️ Could not compare with yesterday: {e}"
 
