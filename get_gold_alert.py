@@ -2,9 +2,6 @@ import requests
 from datetime import datetime, timedelta
 import csv
 import os
-from dotenv import load_dotenv
-
-load_dotenv()
 # --- CONFIG ---
 API_KEY = os.getenv("METALPRICE_API_KEY")
 BASE = "XAU"
