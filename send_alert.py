@@ -2,11 +2,7 @@ import csv
 from datetime import datetime, timedelta
 import statistics
 import requests
-from dotenv import load_dotenv
 import os
-
-load_dotenv()
-
 # --- CONFIG ---
 CSV_FILE = "gold_ohlc_per_gram.csv"
 TELEGRAM_TOKEN = os.getenv("TELEGRAM_TOKEN")
