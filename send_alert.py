@@ -3,12 +3,21 @@ from datetime import datetime, timedelta
 import statistics
 import requests
 import os
+import re
+
+
+
 # --- CONFIG ---
 CSV_FILE = "gold_ohlc_per_gram.csv"
 TELEGRAM_TOKEN = os.getenv("TELEGRAM_TOKEN")
 TELEGRAM_CHAT_ID = os.getenv("TELEGRAM_CHAT_ID")
 METALPRICE_API_KEY = os.getenv("METALPRICE_API_KEY")
 
+
+def escape_markdown(text):
+    """Escape special characters for MarkdownV2."""
+    return re.sub(r'([_*\[\]()~`>#+\-=|{}.!])', r'\\\1', text)
+    
 def fetch_latest_price():
     url = (
         f"https://api.metalpriceapi.com/v1/latest"
@@ -135,10 +144,11 @@ def summarize_today_from_latest():
 # --- Send message to Telegram ---
 def send_telegram_message(message):
     url = f"https://api.telegram.org/bot{TELEGRAM_TOKEN}/sendMessage"
+    safe_message = escape_markdown(message)
     payload = {
         "chat_id": TELEGRAM_CHAT_ID,
-        "text": message,
-        "parse_mode": "Markdown"
+        "text": safe_message,
+        "parse_mode": "MarkdownV2"
     }
     response = requests.post(url, json=payload)
     if response.status_code == 200:
