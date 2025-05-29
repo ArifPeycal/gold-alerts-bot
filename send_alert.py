@@ -63,7 +63,7 @@ def read_last_week_data():
 
 
 def summarize_week(weekly_data):
-    if not weekly_data or len(weekly_data) < 2:
+    if not weekly_data or len(weekly_data) < 4:
         return "Not enough data for the week."
 
     opens = [d["open"] for d in weekly_data]
@@ -130,7 +130,6 @@ def summarize_today_from_latest():
     message = f"""📅 *Gold Daily Alert* ({day_str}, {date_str})
 
 💰 *Current Price:* {price_today:.2f} MYR/g
-{comparison}
 """
     return message
 
