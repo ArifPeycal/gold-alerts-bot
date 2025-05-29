@@ -10,7 +10,10 @@ TELEGRAM_CHAT_ID = os.getenv("TELEGRAM_CHAT_ID")
 
 def read_last_week_data():
     today = datetime.utcnow().date()
-    one_week_ago = today - timedelta(days=7)
+    # Find most recent Monday (weekday=0)
+    days_since_monday = today.weekday()  # Monday=0, Sunday=6
+    start_of_week = today - timedelta(days=days_since_monday)
+
     weekly_data = []
 
     with open(CSV_FILE, newline='') as f:
@@ -18,7 +21,7 @@ def read_last_week_data():
         for row in reader:
             try:
                 date_obj = datetime.strptime(row["date"], "%Y-%m-%d").date()
-                if one_week_ago <= date_obj <= today:
+                if start_of_week <= date_obj <= today:
                     weekly_data.append({
                         "date": row["date"],
                         "open": float(row["open"]),
