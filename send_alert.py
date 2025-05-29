@@ -12,7 +12,7 @@ CSV_FILE = "gold_ohlc_per_gram.csv"
 TELEGRAM_TOKEN = os.getenv("TELEGRAM_TOKEN")
 TELEGRAM_CHAT_ID = os.getenv("TELEGRAM_CHAT_ID")
 METALPRICE_API_KEY = os.getenv("METALPRICE_API_KEY")
-
+GRAMS_PER_TROY_OUNCE = 31.1035 
 
 def escape_markdown(text):
     """Escape special characters for MarkdownV2."""
