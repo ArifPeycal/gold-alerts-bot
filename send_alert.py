@@ -144,11 +144,10 @@ def summarize_today_from_latest():
 # --- Send message to Telegram ---
 def send_telegram_message(message):
     url = f"https://api.telegram.org/bot{TELEGRAM_TOKEN}/sendMessage"
-    safe_message = escape_markdown(message)
     payload = {
         "chat_id": TELEGRAM_CHAT_ID,
-        "text": safe_message,
-        "parse_mode": "MarkdownV2"
+        "text": message,
+        "parse_mode": "Markdown"
     }
     response = requests.post(url, json=payload)
     if response.status_code == 200:
