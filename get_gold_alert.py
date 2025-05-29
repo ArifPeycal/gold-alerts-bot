@@ -54,15 +54,18 @@ def append_ohlc_to_csv(ohlc):
     file_exists = os.path.isfile(CSV_FILE)
     with open(CSV_FILE, mode='a', newline='') as f:
         writer = csv.writer(f)
-        if not file_exists:
+        if not file_exists:  # Create a header if the file doesn't exist
             writer.writerow(["date", "open", "high", "low", "close"])
-        writer.writerow([
-            ohlc["date"],
-            f"{ohlc['open']:.4f}" if ohlc['open'] else "",
-            f"{ohlc['high']:.4f}" if ohlc['high'] else "",
-            f"{ohlc['low']:.4f}" if ohlc['low'] else "",
-            f"{ohlc['close']:.4f}" if ohlc['close'] else "",
-        ])
+        if ohlc:  # Write OHLC data only if valid data is fetched
+            writer.writerow([
+                ohlc["date"],
+                f"{ohlc['open']:.4f}" if ohlc['open'] else "",
+                f"{ohlc['high']:.4f}" if ohlc['high'] else "",
+                f"{ohlc['low']:.4f}" if ohlc['low'] else "",
+                f"{ohlc['close']:.4f}" if ohlc['close'] else "",
+            ])
+        else:
+            print("No valid data to append to CSV.")
 
 def main():
     date_str = (datetime.utcnow() - timedelta(days=3)).strftime("%Y-%m-%d")
