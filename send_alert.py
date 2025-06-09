@@ -63,7 +63,7 @@ def read_last_week_data():
 
 
 def summarize_week(weekly_data):
-    if not weekly_data or len(weekly_data) < 4:
+    if not weekly_data or len(weekly_data) < 2:
         return "Not enough data for the week."
 
     opens = [d["open"] for d in weekly_data]
